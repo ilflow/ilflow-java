@@ -1,0 +1,146 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "process": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "entryNode": {
+          "type": "string"
+        },
+        "exitNode": {
+          "type": "string"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/node"
+          }
+        },
+        "variables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/variable"
+          }
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      }
+    },
+    "node": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "nodeIsSubProcess": {
+          "type": "boolean"
+        },
+        "function": {
+          "type": "string"
+        },
+        "process": {
+          "type": "string"
+        },
+        "processParameters" : {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/processParameter"
+          }
+        },
+        "nextNodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      }
+    },
+    "variable": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "level": {
+          "enum": [
+            "local",
+            "intermediate",
+            "global"
+          ]
+        },
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "isInput": {
+          "type": "boolean"
+        },
+        "isOutput": {
+          "type": "boolean"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      }
+    },
+    "processParameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "keyValues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/keyValue"
+          }
+        }
+      }
+    },
+    "keyValue": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "runProcess": {
+      "type": "string"
+    },
+    "processes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/process"
+      }
+    }
+  },
+
+  "required": ["name", "runProcess"]
+}
